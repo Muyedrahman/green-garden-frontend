@@ -65,15 +65,15 @@ const SignUp = () => {
 
 
   // form submit handler
-  // const handleSubmit = async event => {
-  //   event.preventDefault()
-  //   const form = event.target
-  //   const name = form.name.value
-  //   const email = form.email.value
-  //   const password = form.password.value
+  const handleSubmit = async event => {
+    event.preventDefault()
+    const form = event.target
+    const name = form.name.value
+    const email = form.email.value
+    const password = form.password.value
 
 
-  // }
+  }
 
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
@@ -135,6 +135,7 @@ const SignUp = () => {
                 Profile Image
               </label>
               <input
+  
                 name="image"
                 type="file"
                 id="image"

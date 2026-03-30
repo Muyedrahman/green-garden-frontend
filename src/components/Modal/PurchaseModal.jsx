@@ -1,6 +1,6 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 
-const PurchaseModal = ({ closeModal, isOpen }) => {
+const   PurchaseModal = ({ closeModal, isOpen }) => {
   // Total Price Calculation
 
   return (
