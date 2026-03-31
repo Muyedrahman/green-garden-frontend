@@ -1,93 +1,87 @@
-import { Link, useLocation, useNavigate } from 'react-router'
-import { FcGoogle } from 'react-icons/fc'
-import useAuth from '../../hooks/useAuth'
-import { toast } from 'react-hot-toast'
-import { TbFidgetSpinner } from 'react-icons/tb'
+import { Link, useLocation, useNavigate } from "react-router";
+import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
-import { imageUpload } from '../../routes'
+import { imageUpload } from "../../routes";
+
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state || '/'
+  const { createUser, updateUserProfile, signInWithGoogle, loading } =
+    useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
 
   // REact Hook Form
-   const {
-     register,
-     handleSubmit,
-     watch,
-     formState: { errors },
-   } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   //  const name1 = watch('name')
   //  console.log(watch);
-   console.log(errors)
-   
+  console.log(errors);
 
-   const onSubmit = async data =>  {
-    const {name, image, email, password} = data
+  const onSubmit = async (data) => {
+    const { name, image, email, password } = data;
 
-    const imageFile = image [0]
-    // const formData = new FormData()
-    // formData.append( 'image', imageFile)
+    const imageFile = image[0];
+    // const formData = new FormData();
+    // formData.append("image", imageFile);
 
-        try {
-            //  const data = await axios.post(
-            //    `https://api.imgbb.com/1/upload?key=${
-            //      import.meta.env.VITE_IMGBB_API_KEY
-            //    }`,
-            //    formData
-            //  );
+    try {
+      // const data = await axios.post(
+      //   `https://api.imgbb.com/1/upload?key=${
+      //     import.meta.env.VITE_IMGBB_API_KEY
+      //   }`,
+      //   formData,
+      // );
+      //  const imageURL = data?.data?.display_url
 
-             const imageURL = await imageUpload(imageFile);
+      const imageURL = await imageUpload(imageFile);
 
-            
       //1. User Registration
-      const result = await createUser(email, password)
+      const result = await createUser(email, password);
 
       // 2 Genarat image url from selected file
 
       //3. Save username & profile photo
       await updateUserProfile(name, imageURL);
-      
 
-      navigate(from, { replace: true })
-      toast.success('Signup Successful')
+      navigate(from, { replace: true });
+      toast.success("Signup Successful");
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-
-
-   };
-
-
-
+  };
 
   // form submit handler
-  const handleSubmit = async event => {
-    event.preventDefault()
-    const form = event.target
-    const name = form.name.value
-    const email = form.email.value
-    const password = form.password.value
+  // const handleSubmit = async event => {
+  //   event.preventDefault()
+  //   const form = event.target
+  //   const name = form.name.value
+  //   const email = form.email.value
+  //   const password = form.password.value
 
-
-  }
+  // }
 
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      await signInWithGoogle();
 
-      navigate(from, { replace: true })
-      toast.success('Signup Successful')
+      navigate(from, { replace: true });
+      toast.success("Signup Successful");
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-  }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -116,7 +110,7 @@ const SignUp = () => {
                   required: "Name is require",
                   maxLength: {
                     value: 20,
-                    message: 'Name canot to be long' 
+                    message: "Name canot to be long",
                   },
                 })}
               />
@@ -135,7 +129,6 @@ const SignUp = () => {
                 Profile Image
               </label>
               <input
-  
                 name="image"
                 type="file"
                 id="image"
@@ -238,6 +231,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;
