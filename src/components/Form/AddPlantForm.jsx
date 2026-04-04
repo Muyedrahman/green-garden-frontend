@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../routes";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const AddPlantForm = () => {
   const {user} = useAuth();
@@ -14,6 +15,8 @@ const AddPlantForm = () => {
   const onSubmit = async (data) => {
     const { name, description, quantity, price, category, image } = data;
     const imageFile = image[0];
+   try{
+    
     const imageUrl = await imageUpload(imageFile);
     const plantData = {
       image: imageUrl,
@@ -28,7 +31,14 @@ const AddPlantForm = () => {
         email: user?.email,
       },
     };
-    console.table(plantData)
+     const { data } = await axios.post(
+       `${import.meta.env.VITE_API_URL}/plants`,
+       plantData,
+     );
+     console.log(data);
+   }catch(err){
+    console.log(err);
+   }
   };
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
