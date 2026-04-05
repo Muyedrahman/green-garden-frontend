@@ -1,6 +1,6 @@
 import axios from "axios";
-
-export const imageUpload = async (ImageData) => {
+// ImageData;
+export const imageUpload = async (imageFile) => {
   const formData = new FormData();
   formData.append("image", imageFile);
 
@@ -8,7 +8,8 @@ export const imageUpload = async (ImageData) => {
     `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
     formData,
   );
-   return data?.data?.display_url
+  // display_url;
+   return data?.data?.url;
 
 //   const imageURL = await imageUpload(imageFile);
 };
@@ -16,8 +17,8 @@ export const imageUpload = async (ImageData) => {
 
 // Upload image using cloudinery
 // Example post endpoint: https://api.cloudinary.com/v1_1/<cloud name>/<resource_type>/upload
-
-export const imageUploadCloudinary = async (ImageData) => {
+// ImageData;
+export const imageUploadCloudinary = async (imageFile) => {
   const formData = new FormData();
   formData.append("file", imageFile);
   formData.append(

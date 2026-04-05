@@ -10,7 +10,6 @@ const Plants = () => {
     queryKey: ["plants"],
     queryFn: async () => {
      const result = await axios(`${import.meta.env.VITE_API_URL}/plants`);
-     console.log(result);
      return result.data;
     },
   })

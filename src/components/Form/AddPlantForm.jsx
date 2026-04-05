@@ -3,7 +3,6 @@ import { imageUpload } from "../../routes";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { data } from "react-router";
 import ErrorPage from "../../pages/ErrorPage";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import toast from "react-hot-toast";
@@ -63,7 +62,7 @@ const AddPlantForm = () => {
         price: Number(price),
         category,
         seller: {
-          image: user?.imageURl,
+          image: user?.photoURL,
           name: user?.displayName,
           email: user?.email,
         },
