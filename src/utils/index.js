@@ -9,11 +9,10 @@ export const imageUpload = async (imageFile) => {
     formData,
   );
   // display_url;
-   return data?.data?.url;
+  return data?.data?.url;
 
-//   const imageURL = await imageUpload(imageFile);
+  //   const imageURL = await imageUpload(imageFile);
 };
-
 
 // Upload image using cloudinery
 // Example post endpoint: https://api.cloudinary.com/v1_1/<cloud name>/<resource_type>/upload
@@ -30,8 +29,16 @@ export const imageUploadCloudinary = async (imageFile) => {
     `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
     formData,
   );
-  return data?.secure_url;  
+  return data?.secure_url;
 
   //   const imageURL = await imageUpload(imageFile);
 };
 
+// save or uplate user in
+export const saveOrUpdateUser = async (userData) => {
+  const { data } = await axios.post(
+    `${import.meta.env.VITE_API_URL}/user`,
+    userData,
+  );
+  return data;
+};
