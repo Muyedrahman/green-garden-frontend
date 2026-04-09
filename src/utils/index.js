@@ -9,7 +9,8 @@ export const imageUpload = async (imageFile) => {
     formData,
   );
   // display_url;
-  return data?.data?.url;
+  // return data?.data?.url;
+  return data?.data?.data?.display_url;
 
   //   const imageURL = await imageUpload(imageFile);
 };

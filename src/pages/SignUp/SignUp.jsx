@@ -8,8 +8,7 @@ import { imageUpload, saveOrUpdateUser  } from "../../utils";
 
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, signInWithGoogle, loading } =
-    useAuth();
+  const { createUser, updateUserProfile, signInWithGoogle, loading, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
@@ -18,7 +17,7 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
+     
     formState: { errors },
   } = useForm();
   //  const name1 = watch('name')
@@ -49,15 +48,15 @@ const SignUp = () => {
       //1. User Registration
       const result = await createUser(email, password);
 
-      await saveOrUpdateUser({name, email, image: imageURL});
-
-
+      await saveOrUpdateUser({ name, email, image: imageURL });
 
       // 2 Genarat image url from selected file
 
+      
+
       //3. Save username & profile photo
       await updateUserProfile(name, imageURL);
-
+setUser({ ...result.user, displayName: name, photoURL: imageURL });
       navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (err) {
