@@ -20,7 +20,7 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, user, refetch }) => {
         console.log(err);
         toast.error(err?.response?.data?.message);
       }finally{
-        closeModal
+        closeModal()
       }
     };
 
